@@ -20,24 +20,37 @@ last_name_exp = '''[A-Z,a-z]+\s([A-Z, a-z]+)'''
 
 mother1 = Mother(phone_num=1123456789, mother_condition='Cramps', age=29, postal_code='07016', first_name='Jane',last_name='Smith', give_aid=True, receive_aid=True, home_city='New York');
 mother1.save();
+baby1 = Baby(mother=mother1, baby_gender='Male', conception_datetime=datetime.datetime.now(), birth_of_baby=False)
+baby1.save();
 mother2 = Mother(phone_num=19745325461, mother_condition='Stomach Ache', age=18, postal_code='07016', first_name='Emily',last_name='Jones', give_aid=True, receive_aid=True, home_city='New York');
 mother2.save();
+baby2 = Baby(mother=mother2, baby_gender='Male', conception_datetime=datetime.datetime.now(), birth_of_baby=False)
+baby2.save();
 mother3 = Mother(phone_num=12435564534, mother_condition='Healthy', age=32, postal_code='12345', first_name='Robin',last_name='Brown', give_aid=True, receive_aid=True, home_city='New York');
 mother3.save();
+baby3 = Baby(mother=mother3, baby_gender='Male', conception_datetime=datetime.datetime.now(), birth_of_baby=False)
+baby3.save();
 mother4 = Mother(phone_num=19562451654, mother_condition='Healthy', age=30, postal_code='84653', first_name='Karen',last_name='Cummings', give_aid=True, receive_aid=True, home_city='New York');
 mother4.save();
+baby4 = Baby(mother=mother4, baby_gender='Male', conception_datetime=datetime.datetime.now(), birth_of_baby=False)
+baby4.save();
 mother5 = Mother(phone_num=12645765487, mother_condition='Healthy', age=25, postal_code='07016', first_name='Emily',last_name='Goldstein', give_aid=True, receive_aid=True, home_city='New York');
 mother5.save();
+baby5 = Baby(mother=mother5, baby_gender='Male', conception_datetime=datetime.datetime.now(), birth_of_baby=False)
+baby5.save();
 mother6 = Mother(phone_num=1563456765, mother_condition='Numb Toes', age=25, postal_code='07016', first_name='Hannah',last_name='Chang', give_aid=True, receive_aid=True, home_city='New York');
 mother6.save();
+baby6 = Baby(mother=mother6, baby_gender='Male', conception_datetime=datetime.datetime.now(), birth_of_baby=False)
+baby6.save();
 
 def makecsv(request):
+	plt.clf()
+	os.remove('/home/alex/Desktop/AriadneHack/Uttar/betterbirth/piechart.png')
 	babies = Baby.objects.all()
 	now = time.time()
 	first = 5
 	second = 5
 	third = 5
-	print now
 	for item in babies:
 		conception = int(item.conception_datetime.strftime("%s"))		
 		diff = now - conception
@@ -49,7 +62,6 @@ def makecsv(request):
 			third += 1
 
 	trimester_list = '"1","' + str(first) + '"\n"2","' + str(second) + '"\n"3","' + str(third) + '"\n'
-	print trimester_list
 	f = open('/home/alex/Desktop/AriadneHack/Uttar/betterbirth/data.csv', 'w')
 	f.write(trimester_list);
 	f.close()
@@ -59,11 +71,9 @@ def makecsv(request):
 	rows = [];
 	for line in reader:
 		rows.append(line[1])
-
 # Casting string list to double list
 	rows = map(float, rows)
 	total = sum(rows)
-	print total
 		
 	labels = 'Third Trimester', 'Second Trimester', 'First Trimester'
 	sizes = [rows[2]/total*100, rows[1]/total*100, rows[0]/total*100]
