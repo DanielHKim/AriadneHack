@@ -40,3 +40,5 @@ alias pydoc python -m pydoc
 
 rehash
 
+export TWILIO_ACCOUNT_SID=AC7282b3855cb7a2cf0d74e4215aa4aaaf
+export TWILIO_AUTH_TOKEN=d756039567aeb6fc5ed4a61c4707ff75

@@ -7,4 +7,10 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^sms/$', 'betterbirth.views.sms'),
+
+    url(r'^makecsv/$', include('betterbirth.urls')),
 )
+
+from django.conf.urls import patterns, include, url
