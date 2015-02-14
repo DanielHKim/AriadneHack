@@ -257,10 +257,10 @@ def sms(request):
 		if not found:
 			r.message("Unfortunately nobody is available") 
 			return r
-
 		message = "Here are some people you can contact:\n"
 		for friend in friends:
-			message += friend.first_name + "'s phone number is " + friend.phone_num + '\n'			
+			if (int(friend.phone_num) != int(from_number[1:])):
+				message += friend.first_name + "'s phone number is " + str(friend.phone_num) + '\n'			
 		r.message(message)
 		return r
 			
