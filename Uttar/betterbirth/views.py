@@ -18,6 +18,18 @@ value_exp = ''':[\s]*(\S[\S\s]*)'''
 first_name_exp = '''([A-Z,a-z]+)\s[A-Z, a-z]+'''
 last_name_exp = '''[A-Z,a-z]+\s([A-Z, a-z]+)'''
 
+mother1 = Mother(phone_num=1123456789, mother_condition='Cramps', age=29, postal_code='07016', first_name='Jane',last_name='Smith', give_aid=True, receive_aid=True, home_city='New York');
+mother1.save();
+mother2 = Mother(phone_num=19745325461, mother_condition='Stomach Ache', age=18, postal_code='07016', first_name='Emily',last_name='Jones', give_aid=True, receive_aid=True, home_city='New York');
+mother2.save();
+mother3 = Mother(phone_num=12435564534, mother_condition='Healthy', age=32, postal_code='12345', first_name='Robin',last_name='Brown', give_aid=True, receive_aid=True, home_city='New York');
+mother3.save();
+mother4 = Mother(phone_num=19562451654, mother_condition='Healthy', age=30, postal_code='84653', first_name='Karen',last_name='Cummings', give_aid=True, receive_aid=True, home_city='New York');
+mother4.save();
+mother5 = Mother(phone_num=12645765487, mother_condition='Healthy', age=25, postal_code='07016', first_name='Emily',last_name='Goldstein', give_aid=True, receive_aid=True, home_city='New York');
+mother5.save();
+mother6 = Mother(phone_num=1563456765, mother_condition='Numb Toes', age=25, postal_code='07016', first_name='Hannah',last_name='Chang', give_aid=True, receive_aid=True, home_city='New York');
+mother6.save();
 
 def makecsv(request):
 	babies = Baby.objects.all()
@@ -82,7 +94,7 @@ def makecsv(request):
 def sms(request):
 	message_body = request.GET.get('Body', '')
 	from_number = request.GET.get('From', '')
-	from_zip = '123456'#request.GET.get('FromZip', '')
+	from_zip = request.GET.get('FromZip', '')
 	from_city = request.GET.get('FromCity', '')
 	mothers = Mother.objects.all()
 	found = False
