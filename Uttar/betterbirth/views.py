@@ -82,7 +82,7 @@ def makecsv(request):
 def sms(request):
 	message_body = request.GET.get('Body', '')
 	from_number = request.GET.get('From', '')
-	from_zip = request.GET.get('FromZip', '')
+	from_zip = '123456'#request.GET.get('FromZip', '')
 	from_city = request.GET.get('FromCity', '')
 	mothers = Mother.objects.all()
 	found = False
@@ -244,3 +244,23 @@ def sms(request):
 		r.message("Go to the hospital!")		
 		return r
 
+	if (key == "FINDFRIEND"):
+		friends = []
+		r = Response()
+		mothers = Mother.objects.all().filter(give_aid=True);
+		found = False
+		for item in mothers:
+			if (int(item.postal_code) == int(from_zip)):
+				friends.append(item)
+				found=True
+
+		if not found:
+			r.message("Unfortunately nobody is available") 
+			return r
+
+		message = "Here are some people you can contact:\n"
+		for friend in friends:
+			message += friend.first_name + "'s phone number is " + friend.phone_num + '\n'			
+		r.message(message)
+		return r
+			
