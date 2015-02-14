@@ -8,7 +8,7 @@ class Mother(models.Model):
     first_name = models.CharField(max_length=64, default='')
     last_name = models.CharField(max_length=64, default='')
     give_aid = models.BooleanField(default=False) # mother-to-mother help
-    receive_aid = models.BooleanField(default=False)
+    receive_aid = models.BooleanField(default=True)
     home_city = models.CharField(max_length=64, default='')
 
     def __str__(self):
